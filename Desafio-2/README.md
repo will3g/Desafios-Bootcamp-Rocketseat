@@ -38,10 +38,7 @@ Para atualizar a senha, o usuário deve também enviar um campo de confirmação
 - Criptografe a senha do usuário para segurança.
 - Realize a validação dos dados de entrada;
 
-## Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção, mas você pode ver o resultado do código do desafio aqui: https://github.com/Rocketseat/bootcamp-gostack-desafio-02
-
-Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
+## Aplicação concluída
+![desafio2](https://user-images.githubusercontent.com/49616761/63644074-c69c7280-c6b6-11e9-904f-4848cbe81c7b.png)
 
 “Não espere para plantar, apenas tenha paciência para colher”!
