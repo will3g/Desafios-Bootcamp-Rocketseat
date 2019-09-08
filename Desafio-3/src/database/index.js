@@ -2,10 +2,11 @@ import Sequelize from 'sequelize';
 
 import Meetuper from '../app/models/User';
 import MeetuperFile from '../app/models/File';
+import MeetupEvent from '../app/models/Event';
 
 import databaseConfig from '../config/database';
 
-const models = [Meetuper, MeetuperFile];
+const models = [Meetuper, MeetuperFile, MeetupEvent];
 
 class Database {
   constructor() {
