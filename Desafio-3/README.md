@@ -16,7 +16,7 @@ Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplic
 
 - [x] Não deve ser possível cadastrar meetups com datas que já passaram.
 
-O usuário também deve poder editar todos dados de meetups que ainda não aconteceram e que ele é organizador.
+O usuário também deve poder editar todos os dados de meetups que ainda não aconteceram e que ele é organizador.
 
 Crie uma rota para listar os meetups que são organizados pelo usuário logado.
 
