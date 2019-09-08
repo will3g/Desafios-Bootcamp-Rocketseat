@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import * as Yup  from 'yup';
-import Meetuper from '../models/User';
+import User from '../models/User';
 import configAut from '../../config/auth';
 
 class SessionController {
@@ -17,20 +17,20 @@ class SessionController {
 
     const { email, password } = req.body;
 
-    const meetuper = await Meetuper.findOne({  where: { email } });
+    const userMeetup = await User.findOne({  where: { email } });
 
-    if(!meetuper) {
+    if(!userMeetup) {
       return res.status(401).json({ error: 'Usuário não encontrado' });
     }
 
-    if(!(await meetuper.checkPassword(password))) {
+    if(!(await userMeetup.checkPassword(password))) {
       return res.status(401).json({ error: 'Senha inválida' });
     }
 
-    const { id, nome } = meetuper;
+    const { id, nome } = userMeetup;
 
     return res.json({
-      meetuper: {
+      userMeetup: {
         id,
         nome,
         email,

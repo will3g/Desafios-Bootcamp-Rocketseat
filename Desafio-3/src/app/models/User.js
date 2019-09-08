@@ -15,9 +15,9 @@ class User extends Model {
       }
     );
 
-    this.addHook('beforeSave', async (meetuper) => {
-      if(meetuper.password) {
-        meetuper.password_cod_hash = await bcrypt.hash(meetuper.password, 8);
+    this.addHook('beforeSave', async (userMeetup) => {
+      if(userMeetup.password) {
+        userMeetup.password_cod_hash = await bcrypt.hash(userMeetup.password, 8);
       }
     });
 
@@ -25,6 +25,7 @@ class User extends Model {
   }
 
   static associate(models) {
+    this.hasMany(models.Event);
     this.belongsTo(models.File, {foreignKey: 'avatar_id', as: 'avatar',});
   }
 

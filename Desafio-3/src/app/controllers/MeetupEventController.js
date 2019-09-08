@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import MeetupEvent from '../models/Event';
+import { isBefore, parseISO } from 'date-fns';
 
 class MeetupEventController {
   async store(req, res) {
@@ -14,21 +15,18 @@ class MeetupEventController {
       return res.status(400).json({ error: 'Validação falhou' });
     }
 
-    const { 
-      id, 
-      titulo, 
-      descricao, 
-      localizacao, 
-      data 
-    } = await MeetupEvent.create(req.body);
+    if(isBefore(parseISO(req.body.data), new Date())) {
+      return res.status(400).json({ error: 'Data inválida para realização do evento' });
+    }
 
-    return res.json({
-      id,
-      titulo,
-      descricao,
-      localizacao,
-      data,
+    const meetup_id = req.userId;
+
+    const eventMeetup = await MeetupEvent.create({
+      ...req.body,
+      meetup_id,
     });
+
+    return res.json(eventMeetup);
   }
 }
 

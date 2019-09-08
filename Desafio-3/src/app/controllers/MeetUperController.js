@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Meetuper from '../models/User';
+import User from '../models/User';
 
 class MeetUperController {
   async store(req, res) { //cria um novo usuário meetuper
@@ -13,13 +13,13 @@ class MeetUperController {
       return res.status(400).json({ error: 'Validação falhou' });
     }
 
-    const userExists = await Meetuper.findOne({ where: { email: req.body.email } });
+    const userExists = await User.findOne({ where: { email: req.body.email } });
     
     if(userExists) {
       return res.status(400).json({ error: 'Usuário já existente' });
     }
 
-    const { id, nome, email } = await Meetuper.create(req.body); //Cria de acrodo com o que é passdo pelo boyd
+    const { id, nome, email } = await User.create(req.body); //Cria de acrodo com o que é passdo pelo boyd
     return res.json({
       id,
       nome,
@@ -46,21 +46,22 @@ class MeetUperController {
 
     const { email, oldPassword } = req.body;
 
-    const meetuper = await Meetuper.findByPk(req.meetuperId);
+    const userMeetup = await User.findByPk(req.userId);
 
-    if (email !== meetuper.email){
-      const meetuperExists = await Meetuper.findOne({ where: { email } });
+    if (email !== userMeetup.email){
 
-      if (meetuperExists) {
+      const userMeetupExists = await User.findOne({ where: { email } });
+
+      if (userMeetupExists) {
         return res.status(400).json({ error: 'Usuário inexistente' })
       }
     }
 
-    if (oldPassword && !(await meetuper.checkPassword(oldPassword))) {
+    if (oldPassword && !(await userMeetup.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Senha diferente' });
     }
 
-    const { id, nome } = await meetuper.update(req.body);
+    const { id, nome } = await userMeetup.update(req.body);
 
     return res.json({
       id,

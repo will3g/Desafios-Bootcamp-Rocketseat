@@ -2,8 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 
 class Event extends Model {
   static init(sequelize) {
-    super.init(
-      {
+    super.init(      {
         titulo: Sequelize.STRING,
         descricao: Sequelize.STRING,
         localizacao: Sequelize.STRING,
@@ -14,11 +13,11 @@ class Event extends Model {
       }
     );
 
-    return this;
+   return this;
   }
 
   static associate(models) {
-    this.belongsTo(models.User, {foreignKey: 'event_id', as: 'event',});
+    this.belongsTo(models.User, {foreignKey: 'meetuper_id'});
   }
 
 }

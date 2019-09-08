@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 
-import Meetuper from '../app/models/User';
-import MeetuperFile from '../app/models/File';
-import MeetupEvent from '../app/models/Event';
+import User from '../app/models/User';
+import File from '../app/models/File';
+import Event from '../app/models/Event';
 
 import databaseConfig from '../config/database';
 
-const models = [Meetuper, MeetuperFile, MeetupEvent];
+const models = [User, File, Event];
 
 class Database {
   constructor() {
@@ -18,7 +18,6 @@ class Database {
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
-
   }
 }
 
