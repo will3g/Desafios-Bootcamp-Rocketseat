@@ -6,6 +6,7 @@ class MeetupEventController {
   async store(req, res) {
     const schema = Yup.object().shape({
       titulo: Yup.string().required(),
+      banner_id: Yup.number().required(),
       descricao: Yup.string().required(),
       localizacao: Yup.string().required(),
       data: Yup.date().required(),

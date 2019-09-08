@@ -26,6 +26,7 @@ class User extends Model {
 
   static associate(models) {
     this.hasMany(models.Event);
+    this.hasMany(models.File);
     this.belongsTo(models.File, {foreignKey: 'avatar_id', as: 'avatar',});
   }
 
