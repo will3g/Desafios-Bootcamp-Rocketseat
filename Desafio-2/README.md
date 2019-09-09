@@ -24,19 +24,19 @@ Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplic
 
 ### Autenticação
 
-Permita que um usuário se autentique em sua aplicação utilizando e-mail e senha.
+- [x] Permita que um usuário se autentique em sua aplicação utilizando e-mail e senha.
 
-- A autenticação deve ser feita utilizando JWT.
-- Realize a validação dos dados de entrada;
+  - [x] A autenticação deve ser feita utilizando JWT.
+  - [x] Realize a validação dos dados de entrada;
 
 ### Cadastro e atualização de usuários
 
-Permita que novos usuários se cadastrem em sua aplicação utilizando nome, e-mail e senha.
+- [x] Permita que novos usuários se cadastrem em sua aplicação utilizando nome, e-mail e senha.
 
-Para atualizar a senha, o usuário deve também enviar um campo de confirmação com a mesma senha.
+- [x] Para atualizar a senha, o usuário deve também enviar um campo de confirmação com a mesma senha.
 
-- Criptografe a senha do usuário para segurança.
-- Realize a validação dos dados de entrada;
+  - [x] Criptografe a senha do usuário para segurança.
+  - [x] Realize a validação dos dados de entrada;
 
 ## Aplicação concluída com sucesso!!!
 ![desafio2](https://user-images.githubusercontent.com/49616761/63644074-c69c7280-c6b6-11e9-904f-4848cbe81c7b.png)
