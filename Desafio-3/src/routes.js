@@ -12,13 +12,16 @@ import altMiddleware from './app/middlewares/auth';
 const routes = new Router();
 const uploads = multer(multerConfig);
 
-routes.post('/', SessionController.store);
-routes.post('/meetupers', UserController.store);
+routes.post('/', SessionController.store); // Cria uma nova sessão
+routes.post('/meetupers', UserController.store); // Cria um novo user
 
-routes.use(altMiddleware);
+routes.use(altMiddleware); // Autenticação
+// Para acessar as rotas abaixo, apartir desse 
+// middleware o usuário deve estar autenticado
 routes.put('/meetupers', UserController.update);
 
 routes.post('/meetups', EventController.store);
+routes.put('/meetups/:id', EventController.update);
 
 routes.post('/files', uploads.single('file'), FileController.store);
 
