@@ -20,8 +20,10 @@ routes.use(altMiddleware); // Autenticação
 // middleware o usuário deve estar autenticado
 routes.put('/meetupers', UserController.update);
 
+routes.get('/meetups', EventController.index);
 routes.post('/meetups', EventController.store);
 routes.put('/meetups/:id', EventController.update);
+routes.delete('/meetups/:id', EventController.delete);
 
 routes.post('/files', uploads.single('file'), FileController.store);
 
