@@ -1,3 +1,4 @@
+import { isBefore } from 'date-fns';
 import Sequelize, { Model } from 'sequelize';
 
 class Event extends Model {
@@ -7,6 +8,12 @@ class Event extends Model {
         descricao: Sequelize.STRING,
         localizacao: Sequelize.STRING,
         data: Sequelize.DATE,
+        past: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return isBefore(this.data, new Date());
+          },
+        },
       },
       {
         sequelize,
@@ -17,6 +24,7 @@ class Event extends Model {
   }
 
   static associate(models) {
+    this.hasMany(models.Subscription, {foreignKey: 'meetup_id'});
     this.belongsTo(models.User, {foreignKey: 'user_id'});
     this.belongsTo(models.File, {foreignKey: 'banner_id'});
   }
