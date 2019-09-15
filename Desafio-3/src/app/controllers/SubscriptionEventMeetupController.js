@@ -2,7 +2,7 @@ import { Op } from 'sequelize';
 import Subscription from '../models/Subscription';
 import User from '../models/User';
 import EventMeetup from '../models/Event';
-
+import SubscriptionMail from '../jobs/SubscriptionMail';
 
 class SubscriptionEventMeetupController {
   
@@ -43,7 +43,7 @@ class SubscriptionEventMeetupController {
       user_id: user.id,
       meetup_id: meetup.id,
     });
-
+    
     return res.json(subscription);
   }
 }
