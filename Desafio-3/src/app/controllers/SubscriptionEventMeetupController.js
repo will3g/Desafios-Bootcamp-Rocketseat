@@ -5,6 +5,27 @@ import EventMeetup from '../models/Event';
 import SubscriptionMail from '../jobs/SubscriptionMail';
 
 class SubscriptionEventMeetupController {
+  async index(req, res) {
+    const subscriptions = await Subscription.findAll({
+      where: {
+        user_id: req.userId,
+      },
+      include: [
+        {
+          model: EventMeetup,
+          where: {
+            data: {
+              [Op.gt]: new Date(),
+            },
+          },
+          required: true,
+        },
+      ],
+      order: [[EventMeetup, 'data']],
+    });
+
+    return res.json(subscriptions);
+  }
   
   async store(req, res) {
     const user = await User.findByPk(req.userId);
