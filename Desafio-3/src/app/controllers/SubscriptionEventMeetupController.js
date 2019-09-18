@@ -1,10 +1,34 @@
 import { Op } from 'sequelize';
-import Subscription from '../models/Subscription';
 import User from '../models/User';
+
 import EventMeetup from '../models/Event';
+import Subscription from '../models/Subscription';
+
 import SubscriptionMail from '../jobs/SubscriptionMail';
+import Queue from '../../lib/Queue';
 
 class SubscriptionEventMeetupController {
+  async index(req, res) {
+    const subscriptions = await Subscription.findAll({
+      where: {
+        user_id: req.userId,
+      },
+      include: [
+        {
+          model: EventMeetup,
+          where: {
+            data: {
+              [Op.gt]: new Date(),
+            },
+          },
+          required: true,
+        },
+      ],
+      order: [[EventMeetup, 'data']],
+    });
+
+    return res.json(subscriptions);
+  }
   
   async store(req, res) {
     const user = await User.findByPk(req.userId);
@@ -35,13 +59,17 @@ class SubscriptionEventMeetupController {
       ],
     });
 
-    if(date_available) {
-      return res.status(400).json({ error: "Não é possível se inscrever duas vezes" });
-    }
+   if(date_available) {
+     return res.status(400).json({ error: "Não é possível se inscrever duas vezes" });
+   }
 
     const subscription = await Subscription.create({
       user_id: user.id,
       meetup_id: meetup.id,
+    });
+
+    await Queue.add(SubscriptionMail.key, {
+      subscription,
     });
     
     return res.json(subscription);
